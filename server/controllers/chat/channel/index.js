@@ -1,5 +1,5 @@
-const { client } = require('../../twilio');
-const config = require('../../config/config');
+const { client } = require('../../../twilio');
+const config = require('../../../config/config');
 
 const serviceId = config.twilio.services.dev; // change for production
 
