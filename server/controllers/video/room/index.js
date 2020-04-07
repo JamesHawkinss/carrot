@@ -14,12 +14,17 @@ function closeRoom(req, res) { // complete (close) a room
         .then(room => res.send(room));
 }
 
-function getCompletedRooms(req, res) { // retrieve all completed rooms (which should be all rooms)
+function getRooms(req, res) {
+    client.video.rooms.list()
+        .then(rooms => res.send(rooms));
+}
+
+function getCompletedRooms(req, res) { // retrieve all completed rooms
     client.video.rooms.list({ status: 'completed' })
         .then(rooms => res.send(rooms));
 }
 
-function getRoomsByName(req, res) { // get rooms by name
+function getRoomByName(req, res) { // get room by name
     client.video.rooms.list({ uniqueName: req.body.name })
         .then(rooms => res.send(rooms));
 }
@@ -27,6 +32,7 @@ function getRoomsByName(req, res) { // get rooms by name
 module.exports = {
     createRoom,
     closeRoom,
+    getRooms,
     getCompletedRooms,
-    getRoomsByName
+    getRoomByName
 }

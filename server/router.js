@@ -4,10 +4,11 @@ const router = express.Router();
 const roomController = require('./controllers/video/room');
 const participantController = require('./controllers/video/room/participants');
 
-router.get('/rooms', roomController.getCompletedRooms);
-router.post('/rooms', roomController.getRoomsByName);
+router.get('/rooms', roomController.getRooms);
+router.get('/rooms/completed', roomController.getCompletedRooms);
+router.get('/rooms/:room', roomController.getRoomByName);
 router.post('/room/create/:room', roomController.createRoom);
-router.patch('/room/:room/close', roomController.closeRoom);
+router.patch('/room/close/:room', roomController.closeRoom);
 
 router.get('/room/:room/participant/:participant', participantController.getParticipant);
 router.get('/room/:room/connected', participantController.getConnectedParticipants);
