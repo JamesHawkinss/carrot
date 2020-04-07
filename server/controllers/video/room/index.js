@@ -1,13 +1,14 @@
 const { client } = require('../../../twilio');
 
 function createRoom(req, res) { // create a room
-    const room = req.query.room;
+    const room = req.params.room;
+    console.log(room);
     client.video.rooms.create({ uniqueName: room })
         .then(room => res.send(room));
 }
 
 function closeRoom(req, res) { // complete (close) a room
-    const room = req.query.room;
+    const room = req.params.room;
     client.video.rooms(room)
         .update({ status: 'completed' })
         .then(room => res.send(room));
