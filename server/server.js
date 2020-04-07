@@ -1,7 +1,14 @@
 const config = require('./config/config');
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
-const { client } = require('./twilio');
+const client = require('./twilio');
+const router = require('./router');
 
-app.listen(config.port, () => console.log("live"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/', router);
+
+app.listen(config.server.port, () => console.log("live"));
