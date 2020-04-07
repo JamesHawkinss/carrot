@@ -19,6 +19,7 @@
   "homepage": "https://github.com/JamesHawkinss/twilio-hackathon#readme",
   "dependencies": {
     "ejs": "^3.0.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "twilio": "^3.42.1"
   }
 }
