@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/JamesHawkinss/twilio-hackathon#readme",
   "dependencies": {
-    "twilio": "^3.42.0"
+    "twilio": "^3.42.1"
   }
 }
