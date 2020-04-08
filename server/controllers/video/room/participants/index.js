@@ -1,4 +1,7 @@
 const { client } = require('../../../../helpers/twilio');
+const config = require('../../../../config/config');
+const AccessToken = require('twilio').jwt.AccessToken;
+const VideoGrant = AccessToken.VideoGrant;
 
 function getParticipant(req, res) { // get a specific participant of a specific room
     const room = req.params.room;
@@ -28,8 +31,21 @@ function disconnectParticipant(req, res) { // disconnect a participant from a ro
         .then(participant => res.send(participant));
 }
 
+function createAccessToken(req, res) {
+    const id = req.params.id;
+    const room = req.params.room;
+    const token = new AccessToken(config.twilio.accountSid, config.twilio.api.key, config.twilio.api.secret);
+    token.identity = id;
+    const videoGrant = new VideoGrant({
+        room: room
+    });
+    token.addGrant(videoGrant);
+    res.send(token.toJwt());
+}
+
 module.exports = {
     getParticipant,
     getConnectedParticipants,
-    disconnectParticipant
+    disconnectParticipant,
+    createAccessToken
 }

@@ -14,6 +14,7 @@ router.patch('/room/:room/close', roomController.closeRoom);
 
 router.get('/room/:room/participant/:participant', participantController.getParticipant);
 router.get('/room/:room/connected', participantController.getConnectedParticipants);
+router.post('/room/:room/token/create/:id', participantController.createAccessToken);
 router.patch('/room/:room/participant/:participant', participantController.disconnectParticipant);
 
 router.get('/users', userController.getUsers);

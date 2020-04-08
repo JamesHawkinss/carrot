@@ -10,6 +10,7 @@ function auth(req, res) {
         values: [username]
     }, function (err, results) {
         if (err) throw err;
+        console.log(results.passwordHash);
         bcrypt.compare(password, results.passwordHash, function(err, result) {
             if (err) throw err;
             if (result) {

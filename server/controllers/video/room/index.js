@@ -2,7 +2,6 @@ const { client } = require('../../../helpers/twilio');
 
 function createRoom(req, res) { // create a room
     const room = req.params.room;
-    console.log(room);
     client.video.rooms.create({ uniqueName: room })
         .then(room => res.send(room));
 }
