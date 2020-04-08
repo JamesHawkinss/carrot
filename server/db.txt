@@ -1,0 +1,5 @@
+table "users" ->
+    / id (auto increment)
+    / username
+    / password (md5 hash)
+

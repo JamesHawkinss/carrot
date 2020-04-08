@@ -19,3 +19,10 @@ function createUser(req, res) {
 
     return res.sendStatus(200); // no error, we presume the user has been created. review this.
 }
+
+function getUsers(req, res) {
+    db.query('SELECT * FROM users', function (err, results) {
+        if (err) return res.send(err);
+        res.send(results);
+    });
+}
