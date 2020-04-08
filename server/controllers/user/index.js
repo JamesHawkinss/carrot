@@ -12,13 +12,12 @@ function createUser(req, res) {
     bcrypt.hash(password, 10, function(err, hash) {
         if (err) throw err;
         db.query({
-            sql: 'INSERT INTO users (username, password) VALUES (?, ?)',
+            sql: 'INSERT INTO users (username, passwordHash) VALUES (?, ?)',
             values: [username, hash]
-        }, function (err) {
+        }, function (err, results) {
             if (err) return res.send(err);
+            console.log(results);
         });
-
-        return res.sendStatus(200); // no error, we presume the user has been created. review this.
     });
 }
 
