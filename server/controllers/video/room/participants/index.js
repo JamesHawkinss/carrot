@@ -1,4 +1,4 @@
-const { client } = require('../../../../twilio');
+const { client } = require('../../../../helpers/twilio');
 
 function getParticipant(req, res) { // get a specific participant of a specific room
     const room = req.params.room;

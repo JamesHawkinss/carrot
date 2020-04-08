@@ -1,4 +1,4 @@
-const { client } = require('../../../twilio');
+const { client } = require('../../../helpers/twilio');
 
 function createRoom(req, res) { // create a room
     const room = req.params.room;
