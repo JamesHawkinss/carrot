@@ -8,6 +8,7 @@ const authController = require('./controllers/user/auth');
 const serverController = require('./controllers/chat/server');
 const channelController = require('./controllers/chat/server/channel');
 const inviteController = require('./controllers/chat/server/channel/invite');
+const memberController = require('./controllers/chat/server/channel/member');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
@@ -41,6 +42,11 @@ router.get('/chat/server/:serverSid/channel/:channelSid/invites', inviteControll
 router.get('/chat/server/:serverSid/channel/:channelSid/invite/:inviteSid', inviteController.getInvite);
 router.post('/chat/server/:serverSid/channel/:channelSid/invite/create', inviteController.createInvite);
 router.delete('/chat/server/:serverSid/channel/:channelSid/invite/:inviteSid/delete', inviteController.deleteInvite);
+
+router.get('/chat/server/:serverSid/channel/:channelSid/members', memberController.getMembers);
+router.get('/chat/server/:serverSid/channel/:channelSid/member/:memberSid', memberController.getMember);
+router.post('/chat/server/:serverSid/channel/:channelSid/member/create/:userId', memberController.createMember);
+router.delete('/chat/server/:serverSid/channel/:channelSid/member/:memberSid/delete', memberController.deleteMember);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);
