@@ -19,7 +19,7 @@ router.post('/room/create/:name', roomController.createRoom);
 router.delete('/room/:roomSid/close', roomController.closeRoom);
 
 router.get('/room/:roomSid/participant/:participantSid', participantController.getParticipant);
-router.get('/room/:roomSid/connected', participantController.getConnectedParticipants);
+router.get('/room/:roomName/connected', participantController.getConnectedParticipants);
 router.post('/room/:roomSid/token/create/:identifier', participantController.createAccessToken);
 router.patch('/room/:roomSid/participant/:participantSid', participantController.disconnectParticipant);
 

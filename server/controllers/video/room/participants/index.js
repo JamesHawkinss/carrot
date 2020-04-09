@@ -43,21 +43,21 @@ function disconnectParticipant(req, res) { // disconnect a participant from a ro
 }
 
 function createAccessToken(req, res) {
-    if (!req.params.identifier || !req.params.roomSid) {
-        return res.status(406).send({ "result": "expected identifier and roomSid" }); // review
+    if (!req.params.identifier || !req.params.roomName) {
+        return res.status(406).send({ "result": "expected identifier and roomName" }); // review
     }
     const identifier = req.params.identifier;
-    const roomSid = req.params.roomSid;
+    const room = req.params.roomName;
     const token = new AccessToken(config.twilio.accountSid, config.twilio.api.key, config.twilio.api.secret);
     token.identity = identifier;
     const videoGrant = new VideoGrant({
-        roomSid: roomSid
+        room: room
     });
     token.addGrant(videoGrant);
     const jwtToken = token.toJwt();
     res.send({
         "result": "success",
-        "roomSid": roomSid,
+        "roomName": room,
         "identifier": identifier,
         "token": jwtToken
     });
