@@ -51,7 +51,7 @@ function createAccessToken(req, res) {
     const token = new AccessToken(config.twilio.accountSid, config.twilio.api.key, config.twilio.api.secret);
     token.identity = identifier;
     const videoGrant = new VideoGrant({
-        room: roomSid
+        roomSid: roomSid
     });
     token.addGrant(videoGrant);
     const jwtToken = token.toJwt();
