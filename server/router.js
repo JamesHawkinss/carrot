@@ -25,7 +25,10 @@ router.delete('/user/:id/delete', userController.deleteUser);
 
 router.post('/user/auth', authController.auth);
 
+router.get('/chat/servers', serverController.getServers);
+router.get('/chat/server/:serverSid', serverController.getServer);
 router.post('/chat/server/create', serverController.createServer);
+router.delete('/chat/server/:serverSid/delete', serverController.deleteServer);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);

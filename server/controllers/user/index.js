@@ -46,7 +46,7 @@ function getUser(req, res) {
         if (err || results.length <= 0) {
             res.sendStatus(404);
         } else {
-            res.send(results);
+            return res.send({ "result": "success", results });
         }
     });
 }
