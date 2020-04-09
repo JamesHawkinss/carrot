@@ -2,9 +2,10 @@
   "name": "twilio-hackathon",
   "version": "1.0.0",
   "description": "Our project for the Twilio Hackaton!",
-  "main": "index.js",
+  "main": "client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -12,14 +13,16 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/JamesHawkinss/twilio-hackathon/issues"
   },
   "homepage": "https://github.com/JamesHawkinss/twilio-hackathon#readme",
   "dependencies": {
     "ejs": "^3.0.2",
+    "electron": "^8.2.1",
     "express": "^4.17.1",
-    "twilio": "^3.42.1"
+    "twilio": "^3.42.1",
+    "twilio-video": "^2.3.0"
   }
 }
