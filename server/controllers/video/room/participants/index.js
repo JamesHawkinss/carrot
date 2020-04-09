@@ -12,7 +12,8 @@ function getParticipant(req, res) { // get a specific participant of a specific 
     client.video.rooms(room)
         .participants.get(participant)
         .fetch()
-        .then(participant => res.send(participant));
+        .then(participant => res.send(participant))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function getConnectedParticipants(req, res) { // get all participants connected to a room
@@ -37,7 +38,8 @@ function disconnectParticipant(req, res) { // disconnect a participant from a ro
     client.video.rooms(room)
         .participants(participant)
         .update({ status: 'disconnected' })
-        .then(participant => res.send(participant));
+        .then(participant => res.send(participant))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function createAccessToken(req, res) {

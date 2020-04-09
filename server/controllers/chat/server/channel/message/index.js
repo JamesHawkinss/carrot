@@ -15,7 +15,8 @@ function createMessage(req, res) {
             from: username,
             body: body
         })
-        .then(message => res.send({ "result": "success", message }));
+        .then(message => res.send({ "result": "success", message }))
+        .catch(err => res.send({ "result": "error", "error": err }))
 }
 
 module.exports = {

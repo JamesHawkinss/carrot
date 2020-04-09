@@ -11,12 +11,15 @@ function createServer(req, res) {
     const friendlyName = req.body.friendlyName;
     client.chat.services.create({
         friendlyName: friendlyName,
-    }).then(service => res.send({ "result": "success", service }));
+    })
+    .then(service => res.send({ "result": "success", service }))
+    .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function getServers(req, res) {
     client.chat.services.list()
-        .then(services => res.send({ "result": "success", services }));
+        .then(services => res.send({ "result": "success", services }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function getServer(req, res) {
@@ -26,7 +29,8 @@ function getServer(req, res) {
     const serverSid = req.params.serverSid;
     client.chat.service(serverSid)
         .fetch()
-        .then(service => res.send({ "result": "success", service }));
+        .then(service => res.send({ "result": "success", service }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function deleteServer(req, res) {
@@ -35,7 +39,8 @@ function deleteServer(req, res) {
     }
     const serverSid = req.params.serverSid;
     client.chat.services(serverSid).remove()
-        .then(res.send({ "result": "success" }));
+        .then(res.send({ "result": "success" }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 module.exports = {

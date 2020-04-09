@@ -11,7 +11,8 @@ function createInvite(req, res) {
         .channels(channelSid)
         .invites
         .create({ identity: identity })
-        .then(invite => res.send({ "result": "success", invite }));
+        .then(invite => res.send({ "result": "success", invite }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function getInvite(req, res) {
@@ -25,7 +26,8 @@ function getInvite(req, res) {
         .channels(channelSid)
         .invites(inviteSid)
         .fetch()
-        .then(invite => res.send({ "result": "success", invite }));
+        .then(invite => res.send({ "result": "success", invite }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function getInvites(req, res) {
@@ -38,7 +40,8 @@ function getInvites(req, res) {
         .channels(channelSid)
         .invites
         .list()
-        .then(invites => res.send({ "result": "success", invites }));
+        .then(invites => res.send({ "result": "success", invites }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function deleteInvite(req, res) {
@@ -52,7 +55,8 @@ function deleteInvite(req, res) {
         .channels(channelSid)
         .invites(inviteSid)
         .remove()
-        .then(res.send({ "result": "success" }));
+        .then(res.send({ "result": "success" }))
+        .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 module.exports = {
