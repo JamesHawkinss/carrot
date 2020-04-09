@@ -3,7 +3,7 @@ const db = require('../../../../../helpers/db');
 
 function createMember(req, res) {
     if (!req.params.serverSid || !req.params.channelSid || !req.params.userId) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and userId" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and userId" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;
@@ -28,7 +28,7 @@ function createMember(req, res) {
 
 function getMember(req, res) {
     if (!req.params.serverSid || !req.params.channelSid || !req.params.memberSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and memberSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and memberSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;
@@ -43,7 +43,7 @@ function getMember(req, res) {
 
 function getMembers(req, res) {
     if (!req.params.serverSid || !req.params.channelSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and memberSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and memberSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;
@@ -56,7 +56,7 @@ function getMembers(req, res) {
 
 function deleteMember(req, res) {
     if (!req.params.serverSid || !req.params.channelSid || !req.params.memberSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and memberSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and memberSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;

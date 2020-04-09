@@ -2,7 +2,7 @@ const { client } = require('../../../../../helpers/twilio');
 
 function createInvite(req, res) {
     if (!req.params.serverSid || !req.params.channelSid || !req.body.username) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and username" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and username" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;
@@ -17,7 +17,7 @@ function createInvite(req, res) {
 
 function getInvite(req, res) {
     if (!req.params.serverSid || !req.params.channelSid || !req.body.inviteSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and inviteSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and inviteSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;
@@ -32,7 +32,7 @@ function getInvite(req, res) {
 
 function getInvites(req, res) {
     if (!req.params.serverSid || !req.params.channelSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;
@@ -46,7 +46,7 @@ function getInvites(req, res) {
 
 function deleteInvite(req, res) {
     if (!req.params.serverSid || !req.params.channelSid || !req.body.inviteSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid and inviteSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid and inviteSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;

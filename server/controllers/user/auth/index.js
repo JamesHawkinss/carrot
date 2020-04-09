@@ -3,7 +3,7 @@ const db = require('../../../helpers/db');
 
 function auth(req, res) {
     if (!req.body.username || !req.body.password) {
-        return res.sendStatus(406).send({ "result": "expected username and password" });
+        return res.status(406).send({ "result": "expected username and password" });
     }
     const username = req.body.username;
     const password = req.body.password;
@@ -12,9 +12,9 @@ function auth(req, res) {
         sql: 'SELECT passwordHash FROM users WHERE username = (?)',
         values: [username]
     }, function (err, results) {
-        if (err) return res.sendStatus(500).send({ "result": "database error" });
+        if (err) return res.status(500).send({ "result": "database error" });
         bcrypt.compare(password, results.passwordHash, function(err, result) {
-            if (err) return res.sendStatus(500).send({ "result": "database error" });
+            if (err) return res.status(500).send({ "result": "database error" });
             if (result) {
                 res.send({ "result": "auth OK" });
             } else {

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 function createUser(req, res) {
     if (!req.body.username || !req.body.password) {
-        return res.sendStatus(406);
+        return res.status(406);
     }
 
     const username = req.body.username;
@@ -15,12 +15,12 @@ function createUser(req, res) {
             sql: 'INSERT INTO users (username, passwordHash) VALUES (?, ?)',
             values: [username, hash]
         }, function (err, results) {
-            if (err) return res.sendStatus(500).send({ "result": "database error", err });
+            if (err) return res.status(500).send({ "result": "database error", err });
             db.query({
                 sql: 'SELECT * FROM USERS WHERE username = (?)',
                 values: [username]
             }, function (err, results) {
-                if (err) return res.sendStatus(500).send({ "result": "database error", err });
+                if (err) return res.status(500).send({ "result": "database error", err });
                 return res.send({ "result": "success", results });
             });
         });
@@ -29,14 +29,14 @@ function createUser(req, res) {
 
 function getUsers(req, res) {
     db.query('SELECT * FROM users', function (err, results) {
-        if (err) return res.sendStatus(500).send({ "result": "database error", err });
+        if (err) return res.status(500).send({ "result": "database error", err });
         res.send(results);
     });
 }
 
 function getUser(req, res) {
     if (!req.params.id || isNaN(req.params.id)) {
-        return res.sendStatus(406).send({ "result": "expected numeric id" });
+        return res.status(406).send({ "result": "expected numeric id" });
     }
     const id = req.params.id;
     db.query({
@@ -53,7 +53,7 @@ function getUser(req, res) {
 
 function deleteUser(req, res) {
     if (!id || NaN(id)) {
-        return res.sendStatus(406).send({ "result": "expected numeric id" });
+        return res.status(406).send({ "result": "expected numeric id" });
     }
     const id = req.params.id;
     db.query({

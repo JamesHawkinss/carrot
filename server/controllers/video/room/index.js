@@ -2,7 +2,7 @@ const { client } = require('../../../helpers/twilio');
 
 function createRoom(req, res) { // create a room
     if (!req.params.room) {
-        return res.sendStatus(406).send({ "result": "expected room" });
+        return res.status(406).send({ "result": "expected room" });
     }
     const room = req.params.room;
     client.video.rooms.create({ uniqueName: room })
@@ -12,7 +12,7 @@ function createRoom(req, res) { // create a room
 
 function closeRoom(req, res) { // complete (close) a room
     if (!req.params.room) {
-        return res.sendStatus(406).send({ "result": "expected room" });
+        return res.status(406).send({ "result": "expected room" });
     }
     const room = req.params.room;
     client.video.rooms(room)
@@ -41,7 +41,7 @@ function getIPRooms(req, res) {
 
 function getRoomByName(req, res) { // get room by name
     if (!req.params.room) {
-        return res.sendStatus(406).send({ "result": "expected name" });
+        return res.status(406).send({ "result": "expected name" });
     }
     const room = req.params.room;
     client.video.rooms.list({ uniqueName: room })

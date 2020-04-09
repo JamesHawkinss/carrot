@@ -2,7 +2,7 @@ const { client } = require('../../../../helpers/twilio');
 
 function createChannel(req, res) {
     if (!req.params.serverSid || !req.body.friendlyName) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and friendlyName" });
+        return res.status(406).send({ "result": "expected serverSid and friendlyName" });
     }
     const serverSid = req.params.serverSid;
     const friendlyName = req.body.friendlyName;
@@ -15,7 +15,7 @@ function createChannel(req, res) {
 
 function getChannels(req, res) {
     if (!req.params.serverSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid" });
+        return res.status(406).send({ "result": "expected serverSid" });
     }
     const serverSid = req.params.serverSid;
     client.chat.services(serverSid)
@@ -26,7 +26,7 @@ function getChannels(req, res) {
 
 function getChannel(req, res) {
     if (!req.params.serverSid || !req.params.channelSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid" });
     }
     const serverSid = req.parmas.serverSid;
     const channelSid = req.params.channelSid;
@@ -39,7 +39,7 @@ function getChannel(req, res) {
 
 function deleteChannel(req, res) {
     if (!req.params.serverSid || !req.params.channelSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid and channelSid" });
+        return res.status(406).send({ "result": "expected serverSid and channelSid" });
     }
     const serverSid = req.params.serverSid;
     const channelSid = req.params.channelSid;

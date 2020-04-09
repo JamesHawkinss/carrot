@@ -6,7 +6,7 @@ const { client } = require('../../../helpers/twilio');
 
 function createServer(req, res) {
     if (!req.body.friendlyName) {
-        return res.sendStatus(406).send({ "result": "expected friendlyName" });
+        return res.status(406).send({ "result": "expected friendlyName" });
     }
     const friendlyName = req.body.friendlyName;
     client.chat.services.create({
@@ -24,7 +24,7 @@ function getServers(req, res) {
 
 function getServer(req, res) {
     if (!req.params.serverSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid" });
+        return res.status(406).send({ "result": "expected serverSid" });
     }
     const serverSid = req.params.serverSid;
     client.chat.service(serverSid)
@@ -35,7 +35,7 @@ function getServer(req, res) {
 
 function deleteServer(req, res) {
     if (!req.params.serverSid) {
-        return res.sendStatus(406).send({ "result": "expected serverSid" });
+        return res.status(406).send({ "result": "expected serverSid" });
     }
     const serverSid = req.params.serverSid;
     client.chat.services(serverSid).remove()
