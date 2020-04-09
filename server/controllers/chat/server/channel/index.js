@@ -9,7 +9,7 @@ function createChannel(req, res) {
     client.chat.services(serverSid)
         .channels
         .create({ friendlyName: friendlyName })
-        .then(channel => res.send({ "result": "success", channel }));
+        .then(channel => res.send({ "result": "success", channel }), res.send({ "result": "error" }));
 }
 
 function getChannels(req, res) {
@@ -19,7 +19,7 @@ function getChannels(req, res) {
     const serverSid = req.params.serverSid;
     client.chat.services(serverSid)
         .channels.list()
-        .then(channels => res.send({ "result": "success", channels }));
+        .then(channels => res.send({ "result": "success", channels }), res.send({ "result": "error" }));
 }
 
 function getChannel(req, res) {
@@ -31,7 +31,7 @@ function getChannel(req, res) {
     client.chat.services(serverSid)
         .channels(channelSid)
         .fetch()
-        .then(channel => res.send({ "result": "success", channel }));
+        .then(channel => res.send({ "result": "success", channel }), res.send({ "result": "error" }));
 }
 
 function deleteChannel(req, res) {
@@ -43,7 +43,7 @@ function deleteChannel(req, res) {
     client.chat.services(serverSid)
         .channels(channelSid)
         .remove()
-        .then(res.send({ "result": "success" }))
+        .then(res.send({ "result": "success" }), res.send({ "result": "error" }))
 }
 
 module.exports = {

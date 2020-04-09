@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const client = require('./helpers/twilio');
 const router = require('./router');
 
 app.use(bodyParser.urlencoded({ extended: false }));
