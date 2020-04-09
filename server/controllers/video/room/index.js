@@ -30,11 +30,11 @@ function getCompletedRooms(req, res) { // retrieve all completed rooms
 }
 
 function getRoomByName(req, res) { // get room by name
-    if (!req.params.name) {
+    if (!req.params.room) {
         return res.sendStatus(406).send({ "result": "expected name" });
     }
-    const name = req.params.name;
-    client.video.rooms.list({ uniqueName: name })
+    const room = req.params.room;
+    client.video.rooms.list({ uniqueName: room })
         .then(rooms => res.send(rooms));
 }
 

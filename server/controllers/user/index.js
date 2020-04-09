@@ -15,16 +15,21 @@ function createUser(req, res) {
             sql: 'INSERT INTO users (username, passwordHash) VALUES (?, ?)',
             values: [username, hash]
         }, function (err, results) {
-            if (err) return res.sendStatus(500).send({ "result": "database error" });
-            console.log(results); // remove in production
-            res.send(results);
+            if (err) return res.sendStatus(500).send({ "result": "database error", err });
+            db.query({
+                sql: 'SELECT * FROM USERS WHERE username = (?)',
+                values: [username]
+            }, function (err, results) {
+                if (err) return res.sendStatus(500).send({ "result": "database error", err });
+                return res.send({ "result": "success", results });
+            });
         });
     });
 }
 
 function getUsers(req, res) {
     db.query('SELECT * FROM users', function (err, results) {
-        if (err) return res.sendStatus(500).send({ "result": "database error" });
+        if (err) return res.sendStatus(500).send({ "result": "database error", err });
         res.send(results);
     });
 }

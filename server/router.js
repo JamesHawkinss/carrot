@@ -5,10 +5,11 @@ const roomController = require('./controllers/video/room');
 const participantController = require('./controllers/video/room/participants');
 const userController = require('./controllers/user');
 const authController = require('./controllers/user/auth');
+const serverController = require('./controllers/chat/server');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
-router.get('/room/:name', roomController.getRoomByName);
+router.get('/room/:room', roomController.getRoomByName);
 router.post('/room/create/:room', roomController.createRoom);
 router.patch('/room/:room/close', roomController.closeRoom);
 
@@ -23,6 +24,8 @@ router.post('/user/create', userController.createUser);
 router.delete('/user/:id/delete', userController.deleteUser);
 
 router.post('/user/auth', authController.auth);
+
+router.post('/chat/server/create', serverController.createServer);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);
