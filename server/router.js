@@ -6,6 +6,8 @@ const participantController = require('./controllers/video/room/participants');
 const userController = require('./controllers/user');
 const authController = require('./controllers/user/auth');
 const serverController = require('./controllers/chat/server');
+const channelController = require('./controllers/chat/server/channel');
+const inviteController = require('./controllers/chat/server/channel/invite');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
@@ -29,6 +31,16 @@ router.get('/chat/servers', serverController.getServers);
 router.get('/chat/server/:serverSid', serverController.getServer);
 router.post('/chat/server/create', serverController.createServer);
 router.delete('/chat/server/:serverSid/delete', serverController.deleteServer);
+
+router.get('/chat/server/:serverSid/channels', channelController.getChannels);
+router.get('/chat/server/:serverSid/channel/:channelSid', channelController.getChannel);
+router.post('/chat/server/:serverSid/channel/create', channelController.createChannel);
+router.delete('/chat/server/:serverSid/channel/:channelSid/delete', channelController.deleteChannel);
+
+router.get('/chat/server/:serverSid/channel/:channelSid/invites', inviteController.getInvites);
+router.get('/chat/server/:serverSid/channel/:channelSid/invite/:inviteSid', inviteController.getInvite);
+router.post('/chat/server/:serverSid/channel/:channelSid/invite/create', inviteController.createInvite);
+router.delete('/chat/server/:serverSid/channel/:channelSid/invite/:inviteSid/delete', inviteController.deleteInvite);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);
