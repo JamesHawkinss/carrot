@@ -8,13 +8,13 @@ const authController = require('./controllers/user/auth');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
-router.get('/rooms/:room', roomController.getRoomByName);
+router.get('/room/:name', roomController.getRoomByName);
 router.post('/room/create/:room', roomController.createRoom);
 router.patch('/room/:room/close', roomController.closeRoom);
 
 router.get('/room/:room/participant/:participant', participantController.getParticipant);
 router.get('/room/:room/connected', participantController.getConnectedParticipants);
-router.post('/room/:room/token/create/:id', participantController.createAccessToken);
+router.post('/room/:room/token/create/:identifier', participantController.createAccessToken);
 router.patch('/room/:room/participant/:participant', participantController.disconnectParticipant);
 
 router.get('/users', userController.getUsers);

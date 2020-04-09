@@ -1,12 +1,18 @@
 const { client } = require('../../../helpers/twilio');
 
 function createRoom(req, res) { // create a room
+    if (!req.params.room) {
+        return res.sendStatus(406).send({ "result": "expected room" });
+    }
     const room = req.params.room;
     client.video.rooms.create({ uniqueName: room })
         .then(room => res.send(room));
 }
 
 function closeRoom(req, res) { // complete (close) a room
+    if (!req.params.room) {
+        return res.sendStatus(406).send({ "result": "expected room" });
+    }
     const room = req.params.room;
     client.video.rooms(room)
         .update({ status: 'completed' })
@@ -24,7 +30,11 @@ function getCompletedRooms(req, res) { // retrieve all completed rooms
 }
 
 function getRoomByName(req, res) { // get room by name
-    client.video.rooms.list({ uniqueName: req.body.name })
+    if (!req.params.name) {
+        return res.sendStatus(406).send({ "result": "expected name" });
+    }
+    const name = req.params.name;
+    client.video.rooms.list({ uniqueName: name })
         .then(rooms => res.send(rooms));
 }
 

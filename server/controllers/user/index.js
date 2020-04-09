@@ -15,26 +15,30 @@ function createUser(req, res) {
             sql: 'INSERT INTO users (username, passwordHash) VALUES (?, ?)',
             values: [username, hash]
         }, function (err, results) {
-            if (err) return res.send(err);
-            console.log(results);
+            if (err) return res.sendStatus(500).send({ "result": "database error" });
+            console.log(results); // remove in production
+            res.send(results);
         });
     });
 }
 
 function getUsers(req, res) {
     db.query('SELECT * FROM users', function (err, results) {
-        if (err) return res.send(err);
+        if (err) return res.sendStatus(500).send({ "result": "database error" });
         res.send(results);
     });
 }
 
 function getUser(req, res) {
+    if (!id || NaN(id)) {
+        return res.sendStatus(406).send({ "result": "expected numeric id" });
+    }
     const id = req.params.id;
     db.query({
         sql: 'SELECT * FROM users WHERE id=(?)',
         values: [id],
     }, function (err, results) {
-        if (error || results.length <= 0) {
+        if (err || results.length <= 0) {
             res.sendStatus(404);
         } else {
             res.send(results);
@@ -43,12 +47,15 @@ function getUser(req, res) {
 }
 
 function deleteUser(req, res) {
+    if (!id || NaN(id)) {
+        return res.sendStatus(406).send({ "result": "expected numeric id" });
+    }
     const id = req.params.id;
     db.query({
         sql: 'DELETE * FROM users WHERE id=(?)',
         values: [id],
     }, function (err, results) {
-        if (error || results.length <= 0) {
+        if (err || results.length <= 0) {
             res.sendStatus(404);
         } else {
             res.send(results);
