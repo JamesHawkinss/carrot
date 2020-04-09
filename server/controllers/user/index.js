@@ -35,7 +35,7 @@ function getUsers(req, res) {
 }
 
 function getUser(req, res) {
-    if (!id || NaN(id)) {
+    if (!req.params.id || isNaN(req.params.id)) {
         return res.sendStatus(406).send({ "result": "expected numeric id" });
     }
     const id = req.params.id;
