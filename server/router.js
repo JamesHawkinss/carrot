@@ -12,6 +12,7 @@ const memberController = require('./controllers/chat/server/channel/member');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
+router.get('/rooms/in-progress', roomController.getIPRooms);
 router.get('/room/:room', roomController.getRoomByName);
 router.post('/room/create/:room', roomController.createRoom);
 router.patch('/room/:room/close', roomController.closeRoom);

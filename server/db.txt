@@ -1,5 +1,0 @@
-table "users" ->
-    / id (auto increment)
-    / username
-    / passwordHash (bcrypt hash)
-
