@@ -54,6 +54,7 @@ function createAccessToken(req, res) {
         room: room
     });
     token.addGrant(videoGrant);
+    console.log(token);
     const jwtToken = token.toJwt();
     res.send({
         "result": "success",
