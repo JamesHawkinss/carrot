@@ -1,7 +1,11 @@
 module.exports = {
     "twilio": {
         "accountSid": "",
-        "authToken": ""
+        "authToken": "",
+        "api": {
+            "key": "",
+            "secret": ""
+        }
     },
     "database": {
         "host": "",
