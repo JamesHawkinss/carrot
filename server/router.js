@@ -16,7 +16,7 @@ router.get('/rooms/completed', roomController.getCompletedRooms);
 router.get('/rooms/in-progress', roomController.getIPRooms);
 router.get('/room/:roomSid', roomController.getRoom);
 router.post('/room/create/:name', roomController.createRoom);
-router.patch('/room/:roomSid/close', roomController.closeRoom);
+router.delete('/room/:roomSid/close', roomController.closeRoom);
 
 router.get('/room/:roomSid/participant/:participantSid', participantController.getParticipant);
 router.get('/room/:roomSid/connected', participantController.getConnectedParticipants);

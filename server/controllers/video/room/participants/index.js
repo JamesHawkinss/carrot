@@ -24,7 +24,7 @@ function getConnectedParticipants(req, res) { // get all participants connected 
     var connected = [];
     client.video.rooms(roomSid).participants
         .each({ status: 'connected' }, (participant) => {
-            connected.push(participant.identity);
+            connected.push(participant.sid);
         });
     return res.send({ "result": "success", connected});
 }
