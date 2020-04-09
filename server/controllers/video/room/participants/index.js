@@ -4,58 +4,59 @@ const AccessToken = require('twilio').jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 
 function getParticipant(req, res) { // get a specific participant of a specific room
-    if (!req.params.room || !req.params.participant) {
-        return res.status(406).send({ "result": "expected room and participant" });
+    if (!req.params.roomSid || !req.params.participantSid) {
+        return res.status(406).send({ "result": "expected roomSid and participantSid" });
     }
-    const room = req.params.room;
-    const participant = req.params.participant;
-    client.video.rooms(room)
-        .participants.get(participant)
+    const roomSid = req.params.roomSid;
+    const participantSid = req.params.participantSid;
+    client.video.rooms(roomSid)
+        .participants.get(participantSid)
         .fetch()
-        .then(participant => res.send(participant))
+        .then(participant => res.send({ "result": "success", participant }))
         .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function getConnectedParticipants(req, res) { // get all participants connected to a room
-    if (!req.params.room) {
-        return res.status(406).send({ "result": "expected room" })
+    if (!req.params.roomSid) {
+        return res.status(406).send({ "result": "expected roomSid" })
     }
-    const room = req.params.room;
+    const roomSid = req.params.roomSid;
     var connected = [];
-    client.video.rooms(room).participants
+    client.video.rooms(roomSid).participants
         .each({ status: 'connected' }, (participant) => {
             connected.push(participant.identity);
         });
-    return res.send(connected);
+    return res.send({ "result": "success", connected});
 }
 
 function disconnectParticipant(req, res) { // disconnect a participant from a room
-    if (!req.params.room || !req.params.participant) {
-        return res.status(406).send({ "result": "expected room and participant" });
+    if (!req.params.roomSid || !req.params.participantSid) {
+        return res.status(406).send({ "result": "expected roomSid and participantSid" });
     }
-    const room = req.params.room;
-    const participant = req.params.participant;
-    client.video.rooms(room)
-        .participants(participant)
+    const roomSid = req.params.roomSid;
+    const participantSid = req.params.participantSid;
+    client.video.rooms(roomSid)
+        .participants(participantSid)
         .update({ status: 'disconnected' })
-        .then(participant => res.send(participant))
+        .then(participant => res.send({ "result": "success", participant }))
         .catch(err => res.send({ "result": "error", "error": err }));
 }
 
 function createAccessToken(req, res) {
-    if (!req.params.identifier || !req.params.room) {
-        return res.status(406).send({ "result": "expected identifier and room" }); // review
+    if (!req.params.identifier || !req.params.roomSid) {
+        return res.status(406).send({ "result": "expected identifier and roomSid" }); // review
     }
     const identifier = req.params.identifier;
-    const room = req.params.room;
+    const roomSid = req.params.roomSid;
     const token = new AccessToken(config.twilio.accountSid, config.twilio.api.key, config.twilio.api.secret);
     token.identity = identifier;
     const videoGrant = new VideoGrant({
-        room: room
+        room: roomSid
     });
     token.addGrant(videoGrant);
     const jwtToken = token.toJwt();
     res.send({
+        "result": "success",
         "room": room,
         "identifier": identifier,
         "token": jwtToken

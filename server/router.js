@@ -14,14 +14,14 @@ const messageController = require('./controllers/chat/server/channel/message');
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
 router.get('/rooms/in-progress', roomController.getIPRooms);
-router.get('/room/:room', roomController.getRoomByName);
-router.post('/room/create/:room', roomController.createRoom);
-router.patch('/room/:room/close', roomController.closeRoom);
+router.get('/room/:roomSid', roomController.getRoom);
+router.post('/room/create/:name', roomController.createRoom);
+router.patch('/room/:roomSid/close', roomController.closeRoom);
 
-router.get('/room/:room/participant/:participant', participantController.getParticipant);
-router.get('/room/:room/connected', participantController.getConnectedParticipants);
-router.post('/room/:room/token/create/:identifier', participantController.createAccessToken);
-router.patch('/room/:room/participant/:participant', participantController.disconnectParticipant);
+router.get('/room/:roomSid/participant/:participantSid', participantController.getParticipant);
+router.get('/room/:roomSid/connected', participantController.getConnectedParticipants);
+router.post('/room/:roomSid/token/create/:identifier', participantController.createAccessToken);
+router.patch('/room/:roomSid/participant/:participantSid', participantController.disconnectParticipant);
 
 router.get('/users', userController.getUsers);
 router.get('/user/:id', userController.getUser);
@@ -50,7 +50,11 @@ router.get('/chat/server/:serverSid/channel/:channelSid/member/:memberSid', memb
 router.post('/chat/server/:serverSid/channel/:channelSid/member/create/:userId', memberController.createMember);
 router.delete('/chat/server/:serverSid/channel/:channelSid/member/:memberSid/delete', memberController.deleteMember);
 
+router.get('/chat/server/:serverSid/channel/:channelSid/messages', messageController.getMessages);
+router.get('/chat/server/:serverSid/channel/:channelSid/message/:messageSid', messageController.getMessage);
 router.post('/chat/server/:serverSid/channel/:channelSid/message/create', messageController.createMessage);
+router.patch('/chat/server/:serverSid/channel/:channelSid/message/:messageSid/update', messageController.updateMessage);
+router.delete('/chat/server/:serverSid/channel/:channelSid/message/:messageSid/delete', messageController.deleteMessage);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);
