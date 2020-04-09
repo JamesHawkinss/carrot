@@ -57,7 +57,7 @@ function createAccessToken(req, res) {
     const jwtToken = token.toJwt();
     res.send({
         "result": "success",
-        "room": room,
+        "roomSid": roomSid,
         "identifier": identifier,
         "token": jwtToken
     });
