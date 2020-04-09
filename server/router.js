@@ -9,6 +9,7 @@ const serverController = require('./controllers/chat/server');
 const channelController = require('./controllers/chat/server/channel');
 const inviteController = require('./controllers/chat/server/channel/invite');
 const memberController = require('./controllers/chat/server/channel/member');
+const messageController = require('./controllers/chat/server/channel/message');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
@@ -48,6 +49,8 @@ router.get('/chat/server/:serverSid/channel/:channelSid/members', memberControll
 router.get('/chat/server/:serverSid/channel/:channelSid/member/:memberSid', memberController.getMember);
 router.post('/chat/server/:serverSid/channel/:channelSid/member/create/:userId', memberController.createMember);
 router.delete('/chat/server/:serverSid/channel/:channelSid/member/:memberSid/delete', memberController.deleteMember);
+
+router.post('/chat/server/:serverSid/channel/:channelSid/message/create', messageController.createMessage);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);

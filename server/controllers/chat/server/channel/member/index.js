@@ -21,7 +21,7 @@ function createMember(req, res) {
             .channels(channelSid)
             .members
             .create({ identity: identity })
-            .then(member => res.send({ "result": "success", member }), res.send({ "result": "error" }));
+            .then(member => res.send({ "result": "success", member }));
     });
 }
 
@@ -36,7 +36,7 @@ function getMember(req, res) {
         .channels(channelSid)
         .members(memberSid)
         .fetch()
-        .then(member => res.send({ "result": "success", member }), res.send({ "result": "error" }));
+        .then(member => res.send({ "result": "success", member }));
 }
 
 function getMembers(req, res) {
@@ -48,7 +48,7 @@ function getMembers(req, res) {
     client.chat.services(serverSid)
         .channels(channelSid)
         .list()
-        .then(members => res.send({ "result": "success", members }), res.send({ "result": "error" }));
+        .then(members => res.send({ "result": "success", members }));
 }
 
 function deleteMember(req, res) {
@@ -62,7 +62,7 @@ function deleteMember(req, res) {
         .channels(channelSid)
         .members(memberSid)
         .remove()
-        .then(res.send({ "result": "success" }), res.send({ "result": "error" }));
+        .then(res.send({ "result": "success" }));
 }
 
 module.exports = {

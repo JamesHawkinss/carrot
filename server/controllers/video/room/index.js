@@ -6,7 +6,7 @@ function createRoom(req, res) { // create a room
     }
     const room = req.params.room;
     client.video.rooms.create({ uniqueName: room })
-        .then(room => res.send(room), res.send({ "result": "error" }));
+        .then(room => res.send(room));
 }
 
 function closeRoom(req, res) { // complete (close) a room
@@ -16,7 +16,7 @@ function closeRoom(req, res) { // complete (close) a room
     const room = req.params.room;
     client.video.rooms(room)
         .update({ status: 'completed' })
-        .then(room => res.send(room), res.send({ "result": "error" }));
+        .then(room => res.send(room));
 }
 
 function getRooms(req, res) {
@@ -26,12 +26,12 @@ function getRooms(req, res) {
 
 function getCompletedRooms(req, res) { // retrieve all completed rooms
     client.video.rooms.list({ status: 'completed' })
-        .then(rooms => res.send(rooms), res.send({ "result": "error" }));
+        .then(rooms => res.send(rooms));
 }
 
 function getIPRooms(req, res) {
     client.video.rooms.list({ status: 'in-progress' })
-        .then(rooms => res.send(rooms), res.send({ "result": "error" }));
+        .then(rooms => res.send(rooms));
 }
 
 function getRoomByName(req, res) { // get room by name
@@ -40,7 +40,7 @@ function getRoomByName(req, res) { // get room by name
     }
     const room = req.params.room;
     client.video.rooms.list({ uniqueName: room })
-        .then(rooms => res.send(rooms), res.send({ "result": "error" }));
+        .then(rooms => res.send(rooms));
 }
 
 module.exports = {
