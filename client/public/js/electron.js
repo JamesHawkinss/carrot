@@ -49,7 +49,7 @@ electron.desktopCapturer.getSources({types: ['screen']}).then(function (sources)
                     hostname: '127.0.0.1',
                     port: 3000,
                     method: 'POST',
-                    path: '/room/test/token/create/test',
+                    path: '/room/' + sid + '/token/create/test-user',
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -64,7 +64,8 @@ electron.desktopCapturer.getSources({types: ['screen']}).then(function (sources)
                         combined = JSON.parse(combined);
                         console.log(combined);
 
-                        var token = combined.identifier;
+                        var token = combined.token;
+                        console.log(token);
                         video.connect(token, {
                             name: 'test',
                             tracks: [new video.LocalVideoTrack(stream.getVideoTracks()[0])]
@@ -77,11 +78,5 @@ electron.desktopCapturer.getSources({types: ['screen']}).then(function (sources)
         });
 
         req.end();
-
-        /*var token = '';
-        video.connect(token, {
-            name: 'test',
-            tracks: [new video.LocalVideoTrack(stream.getVideoTracks()[0])]
-        });*/
     });
 });
