@@ -10,6 +10,7 @@ const channelController = require('./controllers/chat/server/channel');
 const inviteController = require('./controllers/chat/server/channel/invite');
 const memberController = require('./controllers/chat/server/channel/member');
 const messageController = require('./controllers/chat/server/channel/message');
+const roleController = require('./controllers/chat/server/role');
 
 router.get('/rooms', roomController.getRooms);
 router.get('/rooms/completed', roomController.getCompletedRooms);
@@ -55,6 +56,12 @@ router.get('/chat/server/:serverSid/channel/:channelSid/message/:messageSid', me
 router.post('/chat/server/:serverSid/channel/:channelSid/message/create', messageController.createMessage);
 router.patch('/chat/server/:serverSid/channel/:channelSid/message/:messageSid/update', messageController.updateMessage);
 router.delete('/chat/server/:serverSid/channel/:channelSid/message/:messageSid/delete', messageController.deleteMessage);
+
+router.get('/chat/server/:serverSid/roles', roleController.getRoles);
+router.get('/chat/server/:serverSid/role/:roleSid', roleController.getRole);
+router.post('/chat/server/:serverSid/role/create', roleController.createRole);
+router.patch('/chat/server/:serverSid/role/:roleSid/update', roleController.updateRole);
+router.delete('/chat/server/:serverSid/role/:roleSid/delete', roleController.deleteRole);
 
 router.get('/', function(req, res) {
     return res.sendStatus(204);
