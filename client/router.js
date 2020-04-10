@@ -9,7 +9,8 @@ router.get('/stream', function (req, res) { // TODO move these methods to handle
 });
 
 router.get('/view', function (req, res) {
-
+    console.log("View");
+    res.send("<div id='video-div'></div> <script src='/js/view.js'></script>")
 });
 
 module.exports = router;

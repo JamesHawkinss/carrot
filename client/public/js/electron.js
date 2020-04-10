@@ -69,6 +69,10 @@ electron.desktopCapturer.getSources({types: ['screen']}).then(function (sources)
                         video.connect(token, {
                             name: 'test',
                             tracks: [new video.LocalVideoTrack(stream.getVideoTracks()[0])]
+                        }).then(function (room) {
+                            console.log(room);
+                        }, function (error) {
+                            console.log(error);
                         });
                     });
                 });
