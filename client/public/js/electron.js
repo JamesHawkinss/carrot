@@ -65,15 +65,18 @@ electron.desktopCapturer.getSources({types: ['screen']}).then(function (sources)
                         console.log(combined);
 
                         var token = combined.token;
+                        var track = new video.LocalVideoTrack(stream.getVideoTracks()[0]);
                         console.log(token);
                         video.connect(token, {
                             name: 'test',
-                            tracks: [new video.LocalVideoTrack(stream.getVideoTracks()[0])]
+                            tracks: [track]
                         }).then(function (room) {
                             console.log(room);
                         }, function (error) {
                             console.log(error);
                         });
+
+                        document.getElementById('video-div').appendChild(track.attach());
                     });
                 });
 

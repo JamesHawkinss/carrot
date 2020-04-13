@@ -46,7 +46,9 @@ var interval = window.setInterval(function () {
                         console.log(token);
 
                         video.connect(token, {
-                            name: 'test'
+                            name: 'test',
+                            audio: false,
+                            video: false
                         }).then(function (room) {
                             console.log(room);
                             room.participants.forEach(function (participant) {
@@ -72,10 +74,20 @@ var interval = window.setInterval(function () {
 }, 1000);
 
 function handleParticipant(participant) {
+    console.log('participant');
     participant.tracks.forEach(function (publication) {
         if (publication.isSubscribed) {
             const track = publication.track;
-            document.getElementById('video-div').appendChild(track.attach());
+            handleSubscribed(track);
         }
     });
+
+    participant.on('trackSubscribed', function (track) {
+        handleSubscribed(track);
+    });
+}
+
+function handleSubscribed(track) {
+    console.log('subscribed');
+    document.getElementById('video-div').appendChild(track.attach());
 }

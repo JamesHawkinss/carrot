@@ -5,7 +5,7 @@ const Video = require('twilio-video');
 
 router.get('/stream', function (req, res) { // TODO move these methods to handler
     console.log("Stream");
-    res.send("WIP <script src='/js/electron.js'></script>");
+    res.send("<div id='video-div'></div><script src='/js/electron.js'></script>");
 });
 
 router.get('/view', function (req, res) {
