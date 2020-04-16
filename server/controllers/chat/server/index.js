@@ -3,6 +3,7 @@
  */
 
 const { client } = require('../../../helpers/twilio');
+const uuid = require('uuid-random');
 
 function createServer(req, res) {
     if (!req.body.friendlyName) {
@@ -12,7 +13,16 @@ function createServer(req, res) {
     client.chat.services.create({
         friendlyName: friendlyName,
     })
-    .then(service => res.send({ "result": "success", service }))
+    .then(service => {
+        client.chat.services(service.sid)
+            .channels
+            .create({
+                friendlyName: "general",
+                uniqueName: uuid()
+            })
+            .catch(err => console.log(err));
+        res.send({ "result": "success", service }) 
+    })
     .catch(err => res.send({ "result": "error", "error": err }));
 }
 

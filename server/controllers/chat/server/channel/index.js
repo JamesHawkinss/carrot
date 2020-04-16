@@ -1,4 +1,5 @@
 const { client } = require('../../../../helpers/twilio');
+const uuid = require('uuid-random');
 
 function createChannel(req, res) {
     if (!req.params.serverSid || !req.body.friendlyName) {
@@ -8,7 +9,10 @@ function createChannel(req, res) {
     const friendlyName = req.body.friendlyName;
     client.chat.services(serverSid)
         .channels
-        .create({ friendlyName: friendlyName })
+        .create({ 
+            friendlyName: friendlyName,
+            uniqueName: uuid()
+        })
         .then(channel => res.send({ "result": "success", channel }))
         .catch(err => res.send({ "result": "error", "error": err }));
 }

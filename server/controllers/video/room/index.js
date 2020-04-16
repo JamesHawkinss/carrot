@@ -1,12 +1,23 @@
 const { client } = require('../../../helpers/twilio');
+const uuid = require('uuid-random');
 
 function createRoom(req, res) { // create a room
     if (!req.params.name) {
         return res.status(406).send({ "result": "expected name" });
     }
     const name = req.params.name;
+    const serverSid = req.body.serverSid;
     client.video.rooms.create({ uniqueName: name })
-        .then(room => res.send({ "result": "success", room }))
+        .then(room => {
+            client.chat.services(serverSid)
+                .channels
+                .create({
+                    friendlyName: name + "-text",
+                    uniqueName: uuid() + "#voice"
+                })
+                .catch(err => console.log(err));
+            res.send({ "result": "success", room })
+        })
         .catch(err => res.send({ "result": "error", "error": err }));
 }
 
