@@ -14,27 +14,27 @@ function auth(req, res) {
         values: [username]
     }, function (err, results) {
         if (err) return res.status(500).send({
-            "result": "ERROR",
+            "result": "error",
             "error": {
-                "cause": "DATABASE",
+                "cause": "database",
                 "trace": err
             }
         });
         var id = results.id;
         bcrypt.compare(password, results.passwordHash, function (err, result) {
             if (err) return res.status(500).send({
-                "result": "ERROR",
+                "result": "error",
                 "error": {
-                    "cause": "CRYPT",
+                    "cause": "crypt",
                     "trace": err
                 }
             });
             if (result) {
                 crypto.randomBytes(128, function (err, buf) {
                     if (err) return res.status(500).send({
-                        "result": "ERROR",
+                        "result": "error",
                         "error": {
-                            "cause": "CRYPT",
+                            "cause": "crypt",
                             "trace": err
                         }
                     });
@@ -44,14 +44,14 @@ function auth(req, res) {
                         values: [token, id]
                     }, function (err, results) {
                         if (err) return res.status(500).send({
-                            "result": "ERROR",
+                            "result": "error",
                             "error": {
-                                "cause": "DATABASE",
+                                "cause": "database",
                                 "trace": err
                             }
                         });
                         res.send({
-                            "result": "OK",
+                            "result": "success",
                             "auth": {
                                 "id": id,
                                 "token": token
@@ -60,7 +60,7 @@ function auth(req, res) {
                     });
                 });
             } else {
-                res.status(403).send({"result": "FAILED"});
+                res.status(403).send({"result": "failed"});
             }
         });
     });

@@ -12,17 +12,17 @@ function createUser(req, res) {
 
     bcrypt.hash(password, 10, function (err, hash) {
         if (err) return res.status(500).send({
-            "result": "ERROR",
+            "result": "error",
             "error": {
-                "cause": "CRYPT",
+                "cause": "crypt",
                 "trace": err
             }
         });
         crypto.randomBytes(128, function (err, buf) {
             if (err) return res.status(500).send({
-                "result": "ERROR",
+                "result": "error",
                 "error": {
-                    "cause": "CRYPT",
+                    "cause": "crypt",
                     "trace": err
                 }
             });
@@ -32,14 +32,14 @@ function createUser(req, res) {
                 values: [username, hash, token]
             }, function (err, results) {
                 if (err) return res.status(500).send({
-                    "result": "ERROR",
+                    "result": "error",
                     "error": {
-                        "cause": "DATABASE",
+                        "cause": "database",
                         "trace": err
                     }
                 });
                 return res.send({
-                    "result": "OK",
+                    "result": "ok",
                     "auth": {
                         "id": results.insertId,
                         "token": token

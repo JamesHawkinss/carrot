@@ -1,10 +1,10 @@
-const db = require('db');
+const db = require('./db');
 
 function handleAuth(req, res, next) {
     var headers = req.headers;
     if (!headers.hasOwnProperty('Authorization') || !headers.hasOwnProperty('UserID')) {
         res.status(401).send({
-            "result": "FAILED"
+            "result": "failed"
         });
         return;
     }
@@ -17,9 +17,9 @@ function handleAuth(req, res, next) {
     }, function (err, results) {
         if (err) {
             res.status(500).send({
-                "result": "ERROR",
+                "result": "error",
                 "error": {
-                    "cause": "DATABASE",
+                    "cause": "database",
                     "trace": err
                 }
             });
@@ -28,7 +28,7 @@ function handleAuth(req, res, next) {
 
         if (results.length === 0) {
             res.status(401).send({
-                "result": "FAILED"
+                "result": "failed"
             });
             return;
         }
@@ -36,7 +36,7 @@ function handleAuth(req, res, next) {
         var dbToken = results[0].token;
         if (dbToken !== token) {
             res.status(401).send({
-                "result": "FAILED"
+                "result": "failed"
             });
             return;
         }
