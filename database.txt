@@ -1,0 +1,11 @@
+users
+    id
+    username
+    passwordHash
+    token
+    creation_date (data amirite)
+
+tokens
+    userid
+    token
+    primarykey
