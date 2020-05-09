@@ -14,7 +14,7 @@ const messageController = require('./controllers/chat/server/channel/message');
 const roleController = require('./controllers/chat/server/role');
 
 router.get('/rooms/:status', handleAuth, roomController.getRooms);
-router.get('/room/:roomSid', handleAuth, roomController.getRoom);
+router.get('/rooms/:roomSid', handleAuth, roomController.getRoom);
 router.post('/room/create/:name', handleAuth, roomController.createRoom);
 router.delete('/room/:roomSid/close', handleAuth, roomController.closeRoom);
 

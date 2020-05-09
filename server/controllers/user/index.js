@@ -53,7 +53,15 @@ function createUser(req, res) {
 function getUsers(req, res) {
     db.query('SELECT * FROM users', function (err, results) {
         if (err) return res.status(500).send({"result": "database error", err});
-        res.send(results);
+        const users = []
+        for (result of results) {
+            users.push({
+                id: result.id,
+                username: result.username,
+                passwordHash: result.passwordHash
+            });
+        }
+        res.send({"result": "success", users});
     });
 }
 
@@ -69,7 +77,15 @@ function getUser(req, res) {
         if (err || results.length <= 0) {
             res.sendStatus(404);
         } else {
-            return res.send({"result": "success", results});
+            const user = []
+            for (result of results) {
+                user.push({
+                    id: result.id,
+                    username: result.username,
+                    passwordHash: result.passwordHash
+                });
+            }
+            return res.send({"result": "success", user});
         }
     });
 }
