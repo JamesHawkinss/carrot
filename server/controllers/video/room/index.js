@@ -33,19 +33,11 @@ function closeRoom(req, res) { // complete (close) a room
 }
 
 function getRooms(req, res) {
-    client.video.rooms.list()
-        .then(rooms => res.send({ "result": "success", rooms }))
-        .catch(err => res.send({ "result": "error", "error": err }));
-}
-
-function getCompletedRooms(req, res) { // retrieve all completed rooms
-    client.video.rooms.list({ status: 'completed' })
-        .then(rooms => res.send({ "result": "success" , rooms }))
-        .catch(err => res.send({ "result": "error", "error": err }));
-}
-
-function getIPRooms(req, res) {
-    client.video.rooms.list({ status: 'in-progress' })
+    if (!req.params.status) {
+        return res.status(406).send({ "result": "expected status" });
+    }
+    const status = req.params.status;
+    client.video.rooms.list({ status: status })
         .then(rooms => res.send({ "result": "success", rooms }))
         .catch(err => res.send({ "result": "error", "error": err }));
 }
@@ -65,7 +57,5 @@ module.exports = {
     createRoom,
     closeRoom,
     getRooms,
-    getCompletedRooms,
-    getIPRooms,
     getRoom
 }

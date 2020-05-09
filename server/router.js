@@ -13,9 +13,7 @@ const memberController = require('./controllers/chat/server/channel/member');
 const messageController = require('./controllers/chat/server/channel/message');
 const roleController = require('./controllers/chat/server/role');
 
-router.get('/rooms', handleAuth, roomController.getRooms);
-router.get('/rooms/completed', handleAuth, roomController.getCompletedRooms);
-router.get('/rooms/in-progress', handleAuth, roomController.getIPRooms);
+router.get('/rooms/:status', handleAuth, roomController.getRooms);
 router.get('/room/:roomSid', handleAuth, roomController.getRoom);
 router.post('/room/create/:name', handleAuth, roomController.createRoom);
 router.delete('/room/:roomSid/close', handleAuth, roomController.closeRoom);
