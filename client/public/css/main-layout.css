@@ -1,0 +1,102 @@
+html, body {
+    height: 100% !important;
+    margin: 0;
+}
+
+.sidebar {
+    width: 70px;
+    height: 100%;
+    transition: .5s;
+}
+
+.sidebar > * {
+    margin: auto 5px;
+}
+
+.sidebar .server-area {
+    width: 90%;
+    border-radius: 30px;
+}
+
+.server-items > * {
+    margin: 5px;
+}
+
+.folder-items {
+    height: 100px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -55px;
+}
+
+.server-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+.folder-div {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.folder-img {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 5px;
+    display: block;
+    margin: auto;
+}
+
+.guild-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+}
+
+.guild-container {
+    border-radius: 25px;
+}
+
+.server-items {
+    display: none;
+}
+
+.guild-container > span {
+    position: relative;
+    top: -20px;
+    margin-left: 5px;
+}
+
+.sidebar:hover {
+    width: 20%;
+}
+
+.server-area:hover .server-items {
+    display: block;
+}
+
+.guild-folder:hover .folder-items {
+    display: flex;
+}
+
+.folder-items > .guild-container {
+    display: block;
+}
+
+.folder-items > .guild-container > p {
+    width: 70px;
+    margin: 5px;
+    text-align: center;
+}
+
+.folder-items > .guild-container > img {
+    display: block;
+    margin: auto;
+}
+
+.folder-items > .guild-container {
+    margin: 5px;
+}

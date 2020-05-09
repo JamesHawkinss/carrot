@@ -3,7 +3,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 function createMainWindow() {
-    let streamWindow = new BrowserWindow({
+    let mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -11,17 +11,9 @@ function createMainWindow() {
         }
     });
 
-    streamWindow.loadURL('http://127.0.0.1:5555/stream')
+    //mainWindow.setMenu(null);
 
-    let viewWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
-
-    viewWindow.loadURL('http://127.0.0.1:5555/view');
+    mainWindow.loadURL('http://127.0.0.1:5555/')
 }
 
 app.whenReady().then(createMainWindow);

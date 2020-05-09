@@ -11,6 +11,7 @@ if (process.env.server !== undefined) {
     server_url = app.env.server;
 }
 
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));

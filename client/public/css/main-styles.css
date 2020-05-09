@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(40, 40, 40);
+}
+
+.sidebar {
+    background-color: rgb(20, 20, 20);
+    border-right: 1px solid rgb(0, 0, 0);
+}
+
+.sidebar .server-area {
+    background-color: rgb(50, 50, 50);
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.folder-items {
+    display: none;
+    position: absolute;
+}
+
+.guild-container {
+    background-color: black;
+    color: white;
+}
+
+.folder-div {
+    background-color: rgb(40,40,40);
+    border: 1px solid black;
+}
+
+.folder-items {
+    background-color: rgb(40,40,40);
+    border: 1px solid black;
+    border-radius: 5px;
+}
